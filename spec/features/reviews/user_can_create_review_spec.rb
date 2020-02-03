@@ -8,7 +8,7 @@ describe "As a visitor" do
       title = "Good"
       rating = 5
       content = "I found my new best friend"
-      image = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
+      picture = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
 
       visit "/shelters/#{shelter_1.id}"
 
@@ -20,11 +20,11 @@ describe "As a visitor" do
       click_link 'Add Review'
 
       expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/new")
-      
+
       fill_in 'Title', with: title
       select rating, from: :rating
       fill_in 'Content', with: content
-      fill_in 'Image', with: image
+      fill_in 'Picture', with: picture
 
       click_button 'Submit'
 
