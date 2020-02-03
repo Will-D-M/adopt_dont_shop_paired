@@ -1,0 +1,9 @@
+<h2>Fill out this form to update a shelter!</h2>
+<%= form_tag "/shelters/#{params[:id].to_i}", method: 'patch' do %>
+  <h4>Name: <%= text_field_tag 'shelter_name' %></h4>
+  <h4>Address: <%= text_field_tag 'shelter_address' %></h4>
+  <h4>City: <%= text_field_tag 'shelter_city' %></h4>
+  <h4>State: <%= text_field_tag 'shelter_state' %></h4>
+  <h4>Zip: <%= text_field_tag 'shelter_zip' %></h4>
+  <%= submit_tag 'Submit' %>
+<% end %>

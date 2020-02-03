@@ -1,0 +1,9 @@
+<h2>Fill out this form to update <%= @pet.name %>'s information</h2>
+<%= form_tag "/pets/#{@pet.id}", method: 'PATCH' do %>
+  <h4>Image: <%= text_field_tag 'pet_image' %></h4>
+  <h4>Name: <%= text_field_tag 'pet_name' %></h4>
+  <h4>Description: <%= text_field_tag 'pet_description' %></h4>
+  <h4>Approximate Age: <%= text_field_tag 'pet_approximate_age' %></h4>
+  <h4>Sex: <%= text_field_tag 'pet_sex' %>
+  <%= submit_tag 'Update' %>
+<% end %>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AdoptDontShop</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <div class="topnav">
+    <%=link_to "All Pets", "/pets"%>
+    <%=link_to "All Shelters", "/shelters"%>
+  </div>
+
+
+  <body>
+    <%= yield %>
+  </body>
+
+  <div class="footer">
+    <p>Thank you for visiting our site!
+      Do not hesitate to contact us at 1-800-NOPE!</p>
+  </div>
+
+</html>
