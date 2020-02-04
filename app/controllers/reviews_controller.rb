@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
+    @review = Review.find(params[:shelter_id])
   end
 
   private
