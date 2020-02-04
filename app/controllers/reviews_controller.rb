@@ -11,7 +11,6 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    require "pry"; binding.pry
     @review = Review.find(params[:review_id])
   end
 
