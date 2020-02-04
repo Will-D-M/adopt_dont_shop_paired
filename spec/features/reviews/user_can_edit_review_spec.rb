@@ -70,7 +70,7 @@ RSpec.describe 'edit shelter review' do
       click_button 'Submit'
 
       expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
-      expect(page).to have_content("A required field is missing; please fill out all fields!")
+      expect(page).to have_content("Please fill out all required fields.")
 
       fill_in 'Title', with: title2
       fill_in 'Rating', with: ""
@@ -80,19 +80,7 @@ RSpec.describe 'edit shelter review' do
       click_button 'Submit'
 
       expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
-      expect(page).to have_content("A required field is missing; please fill out all fields!")
-
-      fill_in 'Title', with: title2
-      fill_in 'Rating', with: rating2
-      fill_in 'Content', with: content2
-      fill_in 'Picture', with: ""
-      # user story does not mention picture as a required field, should it pass
-      # without flash message if there is no picture?
-
-      click_button 'Submit'
-
-      expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
-      expect(page).to have_content("A required field is missing; please fill out all fields!")
+      expect(page).to have_content("Please fill out all required fields.")
 
       fill_in 'Title', with: title2
       fill_in 'Rating', with: rating2
