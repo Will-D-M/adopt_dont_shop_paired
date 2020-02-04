@@ -37,7 +37,7 @@ RSpec.describe 'update pet info', type: :feature do
   scenario "see link to update on pet show page" do
     visit "/pets/#{@pet2.id}"
 
-    expect(page). to have_link("Update #{@pet2.name}'s information!")
+    expect(page).to have_link("Update #{@pet2.name}'s information!")
   end
 
   scenario "see form on pet edit page" do
