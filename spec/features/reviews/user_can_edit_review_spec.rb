@@ -86,6 +86,8 @@ RSpec.describe 'edit shelter review' do
       fill_in 'Rating', with: rating2
       fill_in 'Content', with: content2
       fill_in 'Picture', with: ""
+      # user story does not mention picture as a required field, should it pass
+      # without flash message if there is no picture?
 
       click_button 'Submit'
 
