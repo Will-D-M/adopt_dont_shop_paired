@@ -15,11 +15,6 @@
 
 
   <body>
-    <% flash.each do |notice, message| %>
-      <section class = "flash-<%=notice%>">
-        <p class = "flash-<%=notice%>"><%= message %></p>
-      </section>
-    <% end  %>
     <%= yield %>
   </body>
 
