@@ -16,8 +16,12 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:review_id])
-    review.update(review_params)
-    redirect_to "/shelters/#{review.shelter_id}"
+    if review.update(review_params) == false
+      flash[:notice] = "A required field is missing; please fill out all fields!"
+      redirect_to "/shelters/#{review.id}/reviews/edit"
+    elsif review.update(review_params) == true
+      redirect_to "/shelters/#{review.shelter_id}"
+    end
   end
 
   private
