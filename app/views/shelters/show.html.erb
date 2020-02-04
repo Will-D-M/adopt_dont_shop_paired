@@ -13,6 +13,6 @@
   <h4><%= review.title %></h4>
   <h4><%= review.rating %> / 5 </h4>
   <p><%= review.content %></p>
-  <p><%= link_to "Edit this review!", "/shelters/#{@shelter.id}/reviews/edit" %></p>
+  <p><%= link_to "Edit this review!", "/shelters/#{review.id}/reviews/edit" %></p>
   <%= image_tag(review.picture) %>
 <% end %>
