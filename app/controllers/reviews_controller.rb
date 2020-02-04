@@ -14,6 +14,10 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:review_id])
   end
 
+  def update
+    require "pry"; binding.pry
+  end
+
   private
 
   def review_params
