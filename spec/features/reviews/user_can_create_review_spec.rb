@@ -22,7 +22,7 @@ describe "As a visitor" do
       expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
 
       fill_in 'Title', with: title
-      select rating, from: :rating
+      fill_in 'Rating', with: rating
       fill_in 'Content', with: content
       fill_in 'Picture', with: picture
 
