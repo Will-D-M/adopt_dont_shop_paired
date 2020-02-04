@@ -10,6 +10,9 @@ class ReviewsController < ApplicationController
     redirect_to "/shelters/#{params[:shelter_id]}"
   end
 
+  def edit
+  end
+
   private
 
   def review_params
