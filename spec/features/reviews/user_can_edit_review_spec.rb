@@ -28,4 +28,28 @@ RSpec.describe 'edit shelter review' do
     expect(find_field('Picture').value).to eq(@review1.picture)
   end
 
+  scenario "fill in prepopulated data with edits, submit form, and be redirected" do
+    visit "/shelters/#{@shelter_1.id}"
+    click_link("Edit this review!")
+    expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
+
+    title2 = "Horrible"
+    rating2 = 1
+    content2 = "I kicked that dog out."
+    picture2 = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
+
+    fill_in 'Title', with: title2
+    fill_in 'Rating', with: rating2
+    fill_in 'Content', with: content2
+    fill_in 'Picture', with: picture2
+
+    click_button 'Submit'
+
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}")
+    expect(page).to have_content(title2)
+    expect(page).to have_content(rating2)
+    expect(page).to have_content(content2)
+    expect(page).to have_css("img[src*='#{picture2}']")
+  end
+
 end
