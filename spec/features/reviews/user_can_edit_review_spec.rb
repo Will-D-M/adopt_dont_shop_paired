@@ -45,6 +45,9 @@ RSpec.describe 'edit shelter review' do
 
     click_button 'Submit'
 
+    # expect(current_path).to eq("/reviews/#{@review1.id}")
+
+
     expect(current_path).to eq("/shelters/#{@shelter_1.id}")
     expect(page).to have_content(title2)
     expect(page).to have_content(rating2)
