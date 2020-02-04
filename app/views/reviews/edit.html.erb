@@ -1,5 +1,5 @@
 <h2>Fill out this form to update a shelter review!</h2>
-<%= form_tag "/shelters/#{params[:id]}" do %>
+<%= form_tag "/reviews/#{@review.shelter_id}", method: 'PATCH' do %>
     <%= label_tag :title %>
     <%= text_field_tag :title, @review.title%><br>
     <%= label_tag :rating %>
