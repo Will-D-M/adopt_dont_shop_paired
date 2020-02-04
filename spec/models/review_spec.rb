@@ -9,7 +9,6 @@ RSpec.describe Review, type: :model do
     it { should validate_presence_of :title
       should validate_presence_of :rating
       should validate_presence_of :content
-      should validate_presence_of :shelter
-      should validate_presence_of :picture}
+      should validate_presence_of :shelter}
   end
 end
