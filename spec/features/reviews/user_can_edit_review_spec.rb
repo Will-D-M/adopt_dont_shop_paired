@@ -89,7 +89,6 @@ RSpec.describe 'edit shelter review' do
 
       click_button 'Submit'
 
-
       expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
       expect(page).to have_content("A required field is missing; please fill out all fields!")
 
