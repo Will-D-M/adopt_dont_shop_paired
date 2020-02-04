@@ -8,13 +8,7 @@ RSpec.describe 'edit shelter review' do
     rating = 5
     content = "I found my new best friend"
     picture = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
-    visit "/shelters/#{@shelter_1.id}"
-    click_link 'Add Review'
-    fill_in 'Title', with: title
-    select rating, from: :rating
-    fill_in 'Content', with: content
-    fill_in 'Picture', with: picture
-    click_button 'Submit'
+    @review1 = Review.create(title: title, rating: rating, content: content, picture: picture, shelter_id: "#{@shelter_1.id}")
   end
 
   scenario "see link to edit shelter review" do
@@ -26,13 +20,12 @@ RSpec.describe 'edit shelter review' do
   scenario "see edit shelter review form with pre populated data" do
     visit "/shelters/#{@shelter_1.id}"
     click_link("Edit this review!")
-    save_and_open_page
 
-    expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/edit")
-    expect(page).to have_content("Good")
-    expect(page).to have_content(5)
-    expect(page).to have_content("I found my new best friend")
-    expect(page).to have_css("img[src*='#{picture}']")
-
+    expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
+    expect(page).to have_selector("input[value=#{@review1.title}]")
+    expect(page).to have_selector("input[value=#{@review1.rating}]")
+    expect(page).to have_xpath("//input[@value='#{@review1.content}']")
+    expect(find_field('Picture').value).to eq(@review1.picture)
   end
+
 end
