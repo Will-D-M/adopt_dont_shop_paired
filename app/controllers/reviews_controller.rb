@@ -11,7 +11,8 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:shelter_id])
+    require "pry"; binding.pry
+    @review = Review.find(params[:review_id])
   end
 
   private
