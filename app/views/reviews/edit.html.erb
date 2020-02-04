@@ -1,0 +1,14 @@
+<h2>Fill out this form to update a shelter review!</h2>
+<%= form_tag "/shelters/#{params[:id]}" do %>
+    <%= label_tag :title %>
+    <%= text_field_tag :title %><br>
+    <%= label_tag :rating %>
+    <%= select_tag :rating, options_for_select([1, 2, 3, 4, 5]) %><br>
+    <%= label_tag :content %>
+    <%= text_field_tag :content %><br>
+    <%= label_tag :picture %>
+    <%= text_field_tag :picture %><br>
+
+    <br>
+    <%= submit_tag 'Submit' %>
+<% end %>
