@@ -25,7 +25,7 @@ describe "As a visitor" do
 
         click_button('Favorite this pet.')
 
-        click_button('Remove this pet from favorites')
+        click_button('Remove this pet from favorites.')
 
         expect(current_path).to eq("/pets/#{@pet1.id}")
 
@@ -35,9 +35,9 @@ describe "As a visitor" do
       it "changes the remove from favorites button to add to favorites" do
         visit "/pets/#{@pet1.id}"
 
-        click_button 'Add to Favorite Pets'
+        click_button 'Favorite this pet.'
 
-        click_button 'Remove this pet from favorites'
+        click_button 'Remove this pet from favorites.'
 
         expect(page).to have_button('Add to Favorite Pets')
       end
@@ -45,11 +45,11 @@ describe "As a visitor" do
       it "decreases the favorites number by 1" do
         visit "/pets/#{@pet1.id}"
 
-        click_button 'Add to Favorite Pets'
+        click_button 'Favorite this pet.'
 
         expect(page).to have_content('Favorites: 1 Pets')
 
-        click_button 'Remove this pet from favorites'
+        click_button 'Remove this pet from favorites.'
 
         expect(page).to have_content('Favorites: 0 Pets')
       end
