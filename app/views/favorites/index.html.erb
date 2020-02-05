@@ -1,3 +1,6 @@
+<% if @fav_pets.empty? %>
+  <h3>You have not favorited any pets.</h3>
+<% end %>
 
 <% @fav_pets.each do |pet| %>
   <section id="favorite<%= pet.id %>">
