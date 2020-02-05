@@ -1,5 +1,6 @@
 <h2> <%= @pet.name %>'s Information </h2>
 <img src="<%=  @pet.image %>" alt="<%= @pet.image %>" style="width:200px">
+<%=button_to "Favorite this pet.", "/favorites/#{@pet.id}", method: :patch %>
 <h4>Name: <%= @pet.name %></h4>
 <h4>Description: <%= @pet.description %></h4>
 <h4>Approximate Age: <%= @pet.approximate_age %></h4>
