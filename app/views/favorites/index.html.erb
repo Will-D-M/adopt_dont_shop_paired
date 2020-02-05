@@ -1,0 +1,7 @@
+
+<% @fav_pets.each do |pet| %>
+  <section id="favorite<%= pet.id %>">
+    <%= image_tag(pet.image, {:style => "width:200px;"}) %>
+    <h4><a href="/pets/<%= pet.id %>">Name: <%= pet.name %></a></h4>
+  </section>
+<% end %>
