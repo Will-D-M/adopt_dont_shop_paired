@@ -66,7 +66,22 @@ RSpec.describe 'favorites index page', type: :feature do
        click_link("#{@pet2.name}")
        expect(current_path).to eq("/pets/#{@pet2.id}")
      end
+  end
 
+  scenario "see a message regarding no favorited pets if none have been favorited" do
+    visit '/favorites'
+
+    expect(page).to have_content("You have not favorited any pets.")
+    expect(page).to_not have_content("Patra")
+
+    visit "/pets/#{@pet1.id}"
+
+    click_button("Favorite this pet.")
+
+    visit '/favorites'
+
+    expect(page).to_not have_content("You have not favorited any pets.")
+    expect(page).to have_content("Patra")
   end
 
 end
