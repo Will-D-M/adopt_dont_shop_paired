@@ -60,4 +60,19 @@ RSpec.describe 'creat/add a favorite' do
     expect(current_path).to eq("/pets/#{@pet2.id}")
   end
 
+  scenario "click favorite button, see flash message on show page" do
+    visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
+
+    expect(current_path).to eq("/pets/#{@pet1.id}")
+    expect(page).to have_content("The pet has been added to your favorites list.")
+
+    visit "/pets/#{@pet2.id}"
+    click_button("Favorite this pet.")
+
+    expect(current_path).to eq("/pets/#{@pet2.id}")
+    expect(page).to have_content("The pet has been added to your favorites list.")
+
+  end
+
 end
