@@ -2,7 +2,6 @@ class FavoritesController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   def index
-    @pets = Pet.all
     @fav_pets = favorites.pets_favorite.keys.map do |petid|
       Pet.find(petid)
     end
