@@ -1,7 +1,6 @@
 <h2>All Pets for "<%= @shelter.name %>"</h2>
   <%@shelter.pets.each do |pet|%>
   <img src="<%=  pet.image %>" alt="<%= pet.image %>" style="width:200px">
-  <%=button_to "Favorite this pet."%>
   <h4><a href="/pets/<%= pet.id %>">Name: <%= pet.name %></a></h4>
   <h4>Approximate Age: <%= pet.approximate_age %></h4>
   <h4>Sex: <%= pet.sex %></h4>
