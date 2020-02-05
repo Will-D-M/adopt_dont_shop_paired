@@ -41,7 +41,7 @@ describe "As a visitor" do
 
         click_button 'Remove this pet from favorites.'
 
-        expect(page).to have_button('Add to Favorite Pets')
+        expect(page).to have_button('Favorite this pet.')
       end
 
       it "decreases the favorites number by 1" do
@@ -49,11 +49,11 @@ describe "As a visitor" do
 
         click_button 'Favorite this pet.'
 
-        expect(page).to have_content('Favorites: 1 Pets')
+        expect(page).to have_content('Favorites: 1 pet')
 
         click_button 'Remove this pet from favorites.'
 
-        expect(page).to have_content('Favorites: 0 Pets')
+        expect(page).to have_content('Favorites: 0 pets')
       end
     end
   end
