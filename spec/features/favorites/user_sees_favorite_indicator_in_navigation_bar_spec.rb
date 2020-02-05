@@ -46,10 +46,10 @@ RSpec.describe 'favorite indicator in navbar' do
   scenario "see favorites link in navigation bar" do
     visit "/shelters/#{@shelter1.id}"
 
-    expect(page).to have_link("Favorites: 0")
+    expect(page).to have_link("Favorites: 0 pets")
 
     visit "/pets/#{@pet2.id}"
 
-    expect(page).to have_link("Favorites: 0")
+    expect(page).to have_link("Favorites: 0 pets")
   end
 end
