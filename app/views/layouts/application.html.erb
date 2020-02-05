@@ -11,9 +11,8 @@
   <div class="topnav">
     <%=link_to "All Pets", "/pets"%>
     <%=link_to "All Shelters", "/shelters"%>
-    <%=link_to "Favorites: 0" %>
+    <%=link_to "Favorites: #{pluralize(favorites.total_count, "pet")}", '/favorites' %>
   </div>
-
 
   <body>
     <% flash.each do |type, msg| %>
