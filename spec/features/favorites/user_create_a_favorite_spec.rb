@@ -46,10 +46,18 @@ RSpec.describe 'creat/add a favorite' do
     visit "/pets/#{@pet2.id}"
 
     expect(page).to have_button("Favorite this pet.")
+  end
 
-    visit "/shelters/#{@shelter1.id}/pets"
+  scenario "click favorite button to go to pet's show page" do
+    visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
 
-    expect(page).to have_button("Favorite this pet.")
+    expect(current_path).to eq("/pets/#{@pet1.id}")
+
+    visit "/pets/#{@pet2.id}"
+    click_button("Favorite this pet.")
+
+    expect(current_path).to eq("/pets/#{@pet2.id}")
   end
 
 end
