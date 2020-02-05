@@ -17,11 +17,11 @@
 
   <body>
     <% flash.each do |type, msg| %>
-      <div>
-        <font size="5" color="red"><%= msg %></font>
-      </div>
+      <section class=<%= type %>>
+        <p><font size="5" color="red"><%= msg %></font></p>
+      </section>
     <% end %>
-    
+
     <%= yield %>
   </body>
 
