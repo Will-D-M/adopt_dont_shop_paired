@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe 'index page from navbar', type: :feature do
   before(:each) do
     @shelter1 = Shelter.create(name: "Bloke",
