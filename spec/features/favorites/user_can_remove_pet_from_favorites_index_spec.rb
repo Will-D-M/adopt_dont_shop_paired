@@ -25,11 +25,13 @@ describe "As a visitor" do
 
         click_button('Favorite this pet.')
 
+        expect(page).to_not have_button("Favorite this pet.")
+
         click_button('Remove this pet from favorites.')
 
         expect(current_path).to eq("/pets/#{@pet1.id}")
 
-        expect(page).to have_content("#{@pet1.name} has been removed from your Favorite Pets.")
+        expect(page).to have_content("The pet has been removed from your Favorite Pets.")
       end
 
       it "changes the remove from favorites button to add to favorites" do
