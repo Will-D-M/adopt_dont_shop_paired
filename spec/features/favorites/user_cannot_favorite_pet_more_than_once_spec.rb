@@ -24,9 +24,9 @@ describe 'When visiting a pet show page' do
 
       click_button('Favorite this pet.')
 
-      expect(page).to_not have_button('Favorite this pet')
+      expect(page).to_not have_button('Favorite this pet.')
 
-      expect(page).to have_button('Remove this pet from favorites')
+      expect(page).to have_button('Remove this pet from favorites.')
     end
   end
 end
