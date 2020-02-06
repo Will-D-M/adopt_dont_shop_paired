@@ -1,3 +1,4 @@
+<h4><%= link_to "Adopt Your Favorite Pets", '/applications/new' %></h4>
 <% if @fav_pets.empty? %>
   <h3>You have not favorited any pets.</h3>
 <% else %>
@@ -7,7 +8,7 @@
 <% @fav_pets.each do |pet| %>
   <section id="favorite<%= pet.id %>">
     <%= image_tag(pet.image, {:style => "width:200px;"}) %>
-    <h4><a href="/pets/<%= pet.id %>">Name: <%= pet.name %></a></h4>
+     <h4><%= link_to "Name: #{pet.name}", href="/pets/#{pet.id}" %></h4>
     <%= button_to 'Remove this pet from favorites.', "/favorites/#{pet.id}", method: :delete, class: 'button' %>
   </section>
 <% end %>
