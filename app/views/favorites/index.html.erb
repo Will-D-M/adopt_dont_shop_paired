@@ -1,7 +1,13 @@
+<% if @fav_pets.empty? %>
+  <h3>You have not favorited any pets.</h3>
+<% else %>
+  <%= button_to 'Remove All Pets from Favorites', "/favorites", method: :delete, class: 'button' %>
+<% end %>
 
 <% @fav_pets.each do |pet| %>
   <section id="favorite<%= pet.id %>">
     <%= image_tag(pet.image, {:style => "width:200px;"}) %>
     <h4><a href="/pets/<%= pet.id %>">Name: <%= pet.name %></a></h4>
+    <%= button_to 'Remove this pet from favorites.', "/favorites/#{pet.id}", method: :delete, class: 'button' %>
   </section>
 <% end %>
