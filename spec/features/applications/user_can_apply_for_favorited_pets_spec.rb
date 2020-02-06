@@ -29,17 +29,6 @@ RSpec.describe 'apply for pet' do
     shelter_id: @shelter2.id,
     shelter_name: @shelter2.name)
 
-    title = "Good"
-    rating = 5
-    content = "I found my new best friend"
-    picture = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
-    @review1 = Review.create(title: title, rating: rating, content: content, picture: picture, shelter_id: "#{@shelter1.id}")
-
-    title2 = "Horrible"
-    rating2 = 1
-    content2 = "I kicked that dog out."
-    picture2 = "https://previews.123rf.com/images/plysuikvv/plysuikvv1606/plysuikvv160600106/60811009-enraged-aggressive-angry-dog-grin-jaws-with-fangs-hungry-drool-.jpg"
-    @review2 = Review.create(title: title2, rating: rating2, content: content2, picture: picture2, shelter_id: "#{@shelter2.id}")
     visit "/pets/#{@pet1.id}"
     click_button("Favorite this pet.")
     visit "/pets/#{@pet2.id}"
