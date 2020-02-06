@@ -1,5 +1,7 @@
 <% if @fav_pets.empty? %>
   <h3>You have not favorited any pets.</h3>
+<% else %>
+  <%= button_to 'Remove All Pets from Favorites', "/favorites", method: :delete, class: 'button' %>
 <% end %>
 
 <% @fav_pets.each do |pet| %>
