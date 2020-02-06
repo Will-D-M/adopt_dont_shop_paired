@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 describe "As a visitor on the pet show page" do
-  describe "by clicking on the remove from favorite pets button" do
-    before(:each) do
-      @shelter1 = Shelter.create(name: "Bloke",
+  before(:each) do
+    @shelter1 = Shelter.create(name: "Bloke",
       address: "123456 E. Koko St.",
       city: "Aville",
       state: "CO",
@@ -12,13 +11,14 @@ describe "As a visitor on the pet show page" do
       pet1_path = "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70"
 
       @pet1 = Pet.create(image: pet1_path,
-      name: "Patra",
-      approximate_age: 2,
-      sex: "female",
-      shelter_id: @shelter1.id,
-      shelter_name: @shelter1.name)
-    end
+        name: "Patra",
+        approximate_age: 2,
+        sex: "female",
+        shelter_id: @shelter1.id,
+        shelter_name: @shelter1.name)
+  end
 
+  describe "by clicking on the remove from favorite pets button" do
     it "displays a message indicating the pet was removed" do
       visit "/pets/#{@pet1.id}"
 
@@ -55,39 +55,44 @@ describe "As a visitor on the pet show page" do
       expect(page).to have_content('Favorites: 0 pets')
     end
   end
-end
 
-describe "As a visitor on the favorites index page" do
-  describe "by clicking on the remove from favorite pets button" do
-    before(:each) do
-      @shelter1 = Shelter.create(name: "Bloke",
-      address: "123456 E. Koko St.",
-      city: "Aville",
-      state: "CO",
-      zip: "83504")
+  describe "As a visitor on the favorites index page" do
+    describe "by clicking on the remove from favorite pets button" do
+      it 'the user can click a link to delete each pet' do
+        visit "/pets/#{@pet1.id}"
 
-      pet1_path = "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70"
+        click_button 'Favorite this pet.'
 
-      @pet1 = Pet.create(image: pet1_path,
-      name: "Patra",
-      approximate_age: 2,
-      sex: "female",
-      shelter_id: @shelter1.id,
-      shelter_name: @shelter1.name)
+        visit '/favorites'
+
+        expect(page).to have_content("Patra")
+
+        click_button 'Remove this pet from favorites.'
+
+        expect(page).to_not have_content("Patra")
+      end
     end
 
-    it 'the user can click a link to delete each pet' do
-      visit "/pets/#{@pet1.id}"
+    describe 'by clicking the remove all pets from favorites' do
+      it 'can clear all favorite pets' do
+        visit "/pets/#{@pet1.id}"
 
-      click_button 'Favorite this pet.'
+        click_button 'Favorite this pet.'
 
-      visit '/favorites'
+        visit '/favorites'
 
-      expect(page).to have_content("Patra")
+        expect(page).to_not have_content("You have not favorited any pets.")
 
-      click_button 'Remove this pet from favorites.'
+        expect(page).to have_content("Favorites: 1 pet")
+        expect(page).to have_content(@pet1.name)
 
-      expect(page).to_not have_content("Patra")
+        click_button 'Remove All Pets from Favorites'
+
+        expect(current_path).to eq('/favorites')
+
+        expect(page).to_not have_content(@pet1.name)
+        expect(page).to have_content("You have not favorited any pets.")
+      end
     end
   end
 end
