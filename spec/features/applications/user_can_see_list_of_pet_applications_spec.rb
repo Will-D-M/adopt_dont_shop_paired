@@ -37,6 +37,22 @@ RSpec.describe 'apply for pet' do
 
   describe "as a visitor, after creating, applications, I visit the favorites index page" do
     scenario "I see section on page with list of all pets with at least one application" do
+      visit "/favorites"
+      click_link("Adopt Your Favorite Pets")
+
+      find(:css, "#check-#{@pet1.id}").set(true)
+      find(:css, "#check-#{@pet2.id}").set(false)
+
+      fill_in "Name", with: "Heihachi"
+      fill_in "Address", with: "1234 E. Tokyo St."
+      fill_in "City", with: "Los Angeles"
+      fill_in "State", with: "CA"
+      fill_in "Zip", with: "90224"
+      fill_in "Phone Number", with: "435-038-9879";
+      fill_in "Describe why you would make a good home:", with: "I love pets."
+
+      click_button "Submit Your Application"
+
       visit '/favorites'
 
       expect(page).to have_css("#pending-applications")
