@@ -1,23 +1,3 @@
-# User Story 16, Applying for a Pet
-#
-# As a visitor
-# When I have added pets to my favorites list
-# And I visit my favorites page ("/favorites")
-# I see a link for adopting my favorited pets
-# When I click that link I'm taken to a new application form
-# At the top of the form, I can select from the pets of which I've favorited for which I'd like this application to apply towards (can be more than one)
-# When I select one or more pets, and fill in my
-# - Name
-# - Address
-# - City
-# - State
-# - Zip
-# - Phone Number
-# - Description of why I'd make a good home for this/these pet(s)
-# And I click on a button to submit my application
-# I see a flash message indicating my application went through for the pets that were selected
-# And I'm taken back to my favorites page where I no longer see the pets for which I just applied listed as favorites
-
 require 'rails_helper'
 
 RSpec.describe 'apply for pet' do
@@ -78,8 +58,8 @@ RSpec.describe 'apply for pet' do
       click_link("Adopt Your Favorite Pets")
 
       expect(current_path).to eq('/applications/new')
-      expect(page).to have_css("#check-#{@pet1.name}")
-      expect(page).to have_css("#check-#{@pet2.name}")
+      expect(page).to have_css("#check-#{@pet1.id}")
+      expect(page).to have_css("#check-#{@pet2.id}")
       expect(page).to have_field("Name")
       expect(page).to have_field("Address")
       expect(page).to have_field("City")
@@ -89,11 +69,11 @@ RSpec.describe 'apply for pet' do
       expect(page).to have_field("Describe why you would make a good home:")
     end
 
-    scenario "on app form, select pet(s), fill out form, submit, and see flash message" do
+    scenario "on app form, select all pets, fill out form, submit, and see submit message" do
       visit '/applications/new'
 
-      find(:css, "#check-#{@pet1.name}").set(true) #to check box
-      find(:css, "#check-#{@pet2.name}").set(true)
+      find(:css, "#check-#{@pet1.id}").set(true)
+      find(:css, "#check-#{@pet2.id}").set(true)
 
       fill_in "Name", with: "Heihachi"
       fill_in "Address", with: "1234 E. Tokyo St."
@@ -105,15 +85,52 @@ RSpec.describe 'apply for pet' do
 
       click_button "Submit Your Application"
 
-      #expect(current_path).to eq("/favorites")
+      expect(current_path).to eq("/favorites")
+      expect(page).to have_content("Your application for the selected pets went through.")
+      expect(page).not_to have_content(@pet1.name)
+
     end
 
-      # find(:css, "#check-#{@pet1.name}").set(true) # to check the box
-      # find(:css, "#check-#{@pet1.name}").set(true) # to uncheck the box
-      # save_and_open_page
+    scenario "on app form, select one pet, fill out form, submit, and see submit message" do
+      visit '/applications/new'
 
-      #need to set up many to many relationship between application, pet_app + pets
-      #pet_app has to belong to both pet and application
-      #application has to have both many pet_apps and pets through pet_apps
+      find(:css, "#check-#{@pet1.id}").set(true)
+      find(:css, "#check-#{@pet2.id}").set(false)
+
+      fill_in "Name", with: "Heihachi"
+      fill_in "Address", with: "1234 E. Tokyo St."
+      fill_in "City", with: "Los Angeles"
+      fill_in "State", with: "CA"
+      fill_in "Zip", with: "90224"
+      fill_in "Phone Number", with: "435-038-9879";
+      fill_in "Describe why you would make a good home:", with: "I love pets."
+
+      click_button "Submit Your Application"
+
+      expect(current_path).to eq("/favorites")
+      expect(page).to have_content("Your application for the selected pets went through.")
+      expect(page).not_to have_content(@pet1.name)
+      expect(page).to have_content(@pet2.name)
+    end
+
+    scenario "select pet(s), dont fill out form fully, submit, and see error message" do
+      visit '/applications/new'
+
+      find(:css, "#check-#{@pet1.id}").set(true)
+      find(:css, "#check-#{@pet2.id}").set(true)
+
+      fill_in "Name", with: "Heihachi"
+      fill_in "Address", with: "1234 E. Tokyo St."
+      fill_in "City", with: ""
+      fill_in "State", with: "CA"
+      fill_in "Zip", with: "90224"
+      fill_in "Phone Number", with: "435-038-9879";
+      fill_in "Describe why you would make a good home:", with: ""
+
+      click_button "Submit Your Application"
+
+      expect(current_path).to eq("/applications/new")
+      expect(page).to have_content("You must complete all fields in order for your application to be considered.")
+    end
   end
 end
