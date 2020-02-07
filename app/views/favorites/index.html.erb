@@ -5,6 +5,7 @@
   <%= button_to 'Remove All Pets from Favorites', "/favorites", method: :delete, class: 'button' %>
 <% end %>
 
+<section id="available">
 <% @fav_pets.each do |pet| %>
   <section id="favorite<%= pet.id %>">
     <%= image_tag(pet.image, {:style => "width:200px;"}) %>
@@ -12,7 +13,14 @@
     <%= button_to 'Remove this pet from favorites.', "/favorites/#{pet.id}", method: :delete, class: 'button' %>
   </section>
 <% end %>
+</section>
+
+
+
+<h2>Pending Applications</h2>
 
 <section id="pending-applications">
-  
+  <% PetApplication.get_pets.each do |pet| %>
+    <h4><%= link_to "Name: #{pet.name}", href="/pets/#{pet.id}" %></h4>
+  <% end %>
 </section>
