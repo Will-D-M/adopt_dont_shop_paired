@@ -62,7 +62,7 @@ RSpec.describe 'apply for pet' do
       visit '/applications/new'
 
       find(:css, "#check-#{@pet1.id}").set(true)
-      find(:css, "#check-#{@pet2.id}").set(true)
+      find(:css, "#check-#{@pet2.id}").set(false)
 
       fill_in "Name", with: "Heihachi"
       fill_in "Address", with: "1234 E. Tokyo St."
@@ -76,8 +76,6 @@ RSpec.describe 'apply for pet' do
 
       expect(current_path).to eq("/favorites")
       expect(page).to have_content("Your application for the selected pets went through.")
-      expect(page).not_to have_content(@pet1.name)
-
     end
 
     scenario "on app form, select one pet, fill out form, submit, and see submit message" do
@@ -98,7 +96,6 @@ RSpec.describe 'apply for pet' do
 
       expect(current_path).to eq("/favorites")
       expect(page).to have_content("Your application for the selected pets went through.")
-      expect(page).not_to have_content(@pet1.name)
       expect(page).to have_content(@pet2.name)
     end
 
