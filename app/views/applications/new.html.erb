@@ -1,0 +1,25 @@
+<header id="appheader"> <h2> Adoption Application </h2></header>
+  <section>
+    <h4> Select the pets you want to apply for: </h4>
+    <%= form_tag '/applications' do %>
+      <% @pets.each do |pet| %>
+      <%= link_to pet.name, "/pets/#{pet.id}" %>
+      <%= check_box_tag 'pet_ids[]', pet.id, false, :id => "check-#{pet.id}" %>
+      <% end %>
+      <br/><%= label_tag :name %>
+      <%= text_field_tag :name %>
+      <%= label_tag :address %>
+      <%= text_field_tag :address %>
+      <br/><%= label_tag :city %>
+      <%= text_field_tag :city %>
+      <%= label_tag :state %>
+      <%= text_field_tag :state %>
+      <br/><%= label_tag :zip %>
+      <%= text_field_tag :zip %>
+      <%= label_tag :phone_number, 'Phone Number' %>
+      <%= text_field_tag :phone_number %><br/>
+      <%= label_tag :description, 'Describe why you would make a good home:'%>
+      <%= text_area_tag :description %>
+      <%= submit_tag 'Submit Your Application' %>
+    <% end %>
+  </section>
