@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'see list of pet applications' do
+RSpec.describe 'approve applications' do
   before(:each) do
     @shelter1 = Shelter.create(name: "Bloke",
     address: "123456 E. Koko St.",

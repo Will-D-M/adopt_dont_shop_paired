@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'see list of pet applications' do
+RSpec.describe 'pet approved for only one application' do
   before(:each) do
     @shelter1 = Shelter.create(name: "Bloke",
     address: "123456 E. Koko St.",
@@ -66,8 +66,8 @@ RSpec.describe 'see list of pet applications' do
     click_button "Submit Your Application"
   end
 
-  describe "I visit application show page with multiple pets" do
-    scenario "I can approve multiple pets" do
+  describe "I visit pet show page with multiple applications" do
+    scenario "I cannot approve other applications for pet already approved" do
       visit "/pets/#{@pet1.id}"
       expect(page).to have_content('adoptable')
       click_link("All Applications For This Pet")
