@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "pets show", type: :feature do
-  before :each do
+RSpec.describe 'no pet applications index page' do
+  before(:each) do
     @shelter1 = Shelter.create(name: "Bloke",
     address: "123456 E. Koko St.",
     city: "Aville",
@@ -21,35 +21,27 @@ RSpec.describe "pets show", type: :feature do
     approximate_age: 2,
     sex: "free",
     shelter_id: @shelter1.id,
-    shelter_name: @shelter1.name,
-    description: "cuddly",
-    adoption_status: "adoptable")
+    shelter_name: @shelter1.name)
     @pet2 = Pet.create(image: pet2_path,
     name: "Shabba",
     approximate_age: 5,
     sex: "indigo",
     shelter_id: @shelter2.id,
-    shelter_name: @shelter2.name,
-    description: "grumpy",
-    adoption_status: "adoptable")
-  end
+    shelter_name: @shelter2.name)
 
-  scenario "sees link for pet on index page" do
-    visit "/pets"
-    click_link "#{@pet1.name}"
-
-    expect(current_path).to eq("/pets/#{@pet1.id}")
-  end
-
-  scenario "sees pet specific information" do
     visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
+    visit "/pets/#{@pet2.id}"
+    click_button("Favorite this pet.")
+  end
 
-    expect(page).to have_css("img[src*='#{@pet1.image}']")
-    expect(page).to have_content("Patra")
-    expect(page).to have_content(2)
-    expect(page).to have_content("free")
-    expect(page).to have_content("cuddly")
-    expect(page).to have_content("adoptable")
+  describe "as a visitor, I visit a pets show page with no applications" do
+    scenario "I click on all applications link and see a message" do
+      visit "/pets/#{@pet1.id}"
+      click_link("All Applications For This Pet")
+
+      expect(page).to have_content("There are no applications for this pet.")
+    end
   end
 
 end

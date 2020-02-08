@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'creat/add a favorite' do
+RSpec.describe 'create/add a favorite' do
   before(:each) do
     @shelter1 = Shelter.create(name: "Bloke",
     address: "123456 E. Koko St.",

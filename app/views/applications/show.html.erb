@@ -1,0 +1,21 @@
+<section id=<%="app#{@application.id}"%>>
+<h2> Application #<%= @application.id %> Information </h2>
+    <p>Name: <%= @application.name %></p>
+    <p>Address: <%= @application.address %></p>
+    <p>City: <%= @application.city %></p>
+    <p>State: <%= @application.state %></p>
+    <p>Zip: <%= @application.zip %></p>
+    <p>Phone Number: <%= @application.phone_number %></p>
+    <p>Describe why you would make a good home: <%= @application.description %></p>
+    <p>Pets applied for:</p>
+    <% @application.pets.each do |pet| %>
+      <section id= <%="pet#{pet.id}"  %>>
+      <p><%= link_to pet.name, "/pets/#{pet.id}" %></p>
+      <% if pet.adoption_status == "adoptable"  %>
+        <p><%= link_to "Approve #{pet.name}'s application", "/pets/#{pet.id}/applications/#{@application.id}/approve", method: :patch %></p>
+      <% elsif pet.adoption_status == "pending" %>
+        <p><%= link_to "Unapprove #{pet.name}'s application", "/pets/#{pet.id}/applications/#{@application.id}/reject", method: :patch %></p>
+      <% end %>
+      </section>
+    <% end %>
+</section>

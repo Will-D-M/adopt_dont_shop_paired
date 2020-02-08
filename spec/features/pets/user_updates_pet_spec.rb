@@ -23,7 +23,7 @@ RSpec.describe 'update pet info', type: :feature do
     shelter_id: @shelter1.id,
     shelter_name: @shelter1.name,
     description: "cuddly",
-    adoption_status: "pending")
+    adoption_status: "adoptable")
     @pet2 = Pet.create(image: pet2_path,
     name: "Shabba",
     approximate_age: 5,

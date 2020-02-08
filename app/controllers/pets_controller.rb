@@ -37,4 +37,19 @@ class PetsController < ApplicationController
     Pet.destroy(params[:id])
     redirect_to '/pets'
   end
+
+  def change_adoption
+    pet = Pet.find(params[:petid])
+    if pet.adoption_status == "adoptable"
+      pet.update(adoption_status: "pending")
+      pet_app = PetApplication.where(pet_id: params[:petid], application_id: params[:appid])[0]
+      pet_app.update(adopted: true)
+      redirect_to "/pets/#{pet.id}"
+    elsif pet.adoption_status == "pending"
+      pet.update(adoption_status: "adoptable")
+      pet_app = PetApplication.where(pet_id: params[:petid], application_id: params[:appid])[0]
+      pet_app[:adopted] = false
+      redirect_to "/applications/#{params[:appid]}"
+    end
+  end
 end

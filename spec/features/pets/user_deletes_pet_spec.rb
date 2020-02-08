@@ -23,7 +23,7 @@ RSpec.describe "deletes pet", type: :feature do
     shelter_id: @shelter2.id,
     shelter_name: @shelter2.name,
     description: "cuddly",
-    adoption_status: "pending")
+    adoption_status: "adoptable")
     @pet2 = Pet.create(image: pet2_path,
     name: "Shabba",
     approximate_age: 5,
@@ -48,7 +48,7 @@ RSpec.describe "deletes pet", type: :feature do
     expect(page).to have_content(2)
     expect(page).to have_content("cuddly")
     expect(page).to have_content("free")
-    expect(page).to have_content("pending")
+    expect(page).to have_content("adoptable")
     expect(page).to have_link("Delete Patra's whole existence! Go ahead!")
   end
 
