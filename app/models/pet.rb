@@ -15,4 +15,8 @@ class Pet < ApplicationRecord
     self.description = "Looking for a home" if self.description.nil?
   end
 
+  def applicant
+    pet_applications.where(adopted: true).first.application
+  end
+
 end
