@@ -7,7 +7,7 @@
   <%= button_to 'Remove this pet from favorites.', "/favorites/#{@pet.id}", method: :delete, class: "button" %>
 <% end %>
 
-<h4>Name: <%= @pet.name %></h4>
+<p><h4>Name: <%= @pet.name %></h4>
 <h4>Description: <%= @pet.description %></h4>
 <h4>Approximate Age: <%= @pet.approximate_age %></h4>
 <h4>Sex: <%= @pet.sex %></h4>
@@ -16,3 +16,7 @@
 <%=link_to "Delete #{@pet.name}'s whole existence! Go ahead!", "/pets/#{@pet.id}", :method => :delete%>
 <h4><%= link_to "All Applications For This Pet", "/pets/#{@pet.id}/applications" %></h4>
 </p>
+
+<% if @pet.adoption_status == "pending" %>
+  <h4>This pet is on hold for <%= @pet.applicant.name %>.
+  <% end %></h4>
