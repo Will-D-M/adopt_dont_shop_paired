@@ -9,9 +9,13 @@
     <p>Describe why you would make a good home: <%= @application.description %></p>
     <p>Pets applied for:</p>
     <% @application.pets.each do |pet| %>
-    <section id= <%="pet#{pet.id}"  %>>
-    <p><%= link_to pet.name, "/pets/#{pet.id}" %>
-    <%= link_to "Approve #{pet.name}'s application", "/pets/#{pet.id}/applications/#{@application.id}/status", method: :patch %></p>
-    </section>
+      <section id= <%="pet#{pet.id}"  %>>
+      <p><%= link_to pet.name, "/pets/#{pet.id}" %></p>
+      <% if pet.adoption_status == "adoptable"  %>
+        <p><%= link_to "Approve #{pet.name}'s application", "/pets/#{pet.id}/applications/#{@application.id}/status", method: :patch %></p>
+      <% elsif pet.adoption_status == "pending" %>
+        <%= link_to "Unapprove #{pet.name}'s application" %>
+      <% end %>
+      </section>
     <% end %>
 </section>
