@@ -34,5 +34,6 @@ Rails.application.routes.draw do
   post '/applications', to: 'applications#create'
   get '/applications/:application_id', to: 'applications#show'
   get '/pets/:id/applications', to: 'applications#index'
-  patch '/pets/:petid/applications/:appid/status', to: 'pets#change_adoption'
+  patch '/pets/:petid/applications/:appid/approve', to: 'pets#change_adoption'
+  patch '/pets/:petid/applications/:appid/reject', to: 'pets#change_adoption'
 end
