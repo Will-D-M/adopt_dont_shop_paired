@@ -1,4 +1,5 @@
 <section id=<%="app#{@application.id}"%>>
+<h2> Application #<%= @application.id %> Information </h2>
     <p>Name: <%= @application.name %></p>
     <p>Address: <%= @application.address %></p>
     <p>City: <%= @application.city %></p>
@@ -6,4 +7,10 @@
     <p>Zip: <%= @application.zip %></p>
     <p>Phone Number: <%= @application.phone_number %></p>
     <p>Describe why you would make a good home: <%= @application.description %></p>
+    <p>Pets applied for:</p>
+    <% @application.pets.each do |pet| %>
+    <section id= <%="pet#{pet.id}"  %>>
+    <%= link_to pet.name, "/pets/#{pet.id}" %>
+    </section>
+    <% end %>
 </section>
