@@ -71,6 +71,7 @@ RSpec.describe 'apply for pet' do
       @application = Application.all.first
       visit "/applications/#{@application.id}"
 
+      expect(page).to have_css("#app#{@application.id}")
       expect(page).to have_content(@application.name)
       expect(page).to have_content(@application.address)
       expect(page).to have_content(@application.city)
