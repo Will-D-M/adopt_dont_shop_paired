@@ -18,5 +18,7 @@
 </p>
 
 <% if @pet.adoption_status == "pending" %>
-  <h4>This pet is on hold for <%= @pet.applicant.name %>.
-  <% end %></h4>
+  <h4>This pet is on hold for <%= @pet.applicant.name %>.</h4?
+    <% elsif @pet.adoption_status == "adoptable" %>
+    <h4>This pet has no holds.</h4>
+  <% end %>
