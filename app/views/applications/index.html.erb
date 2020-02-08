@@ -1,0 +1,6 @@
+<section id="allapplicants">
+  <h2>All Applicants:>}</h2>
+  <% @pet.applications.each do |application| %>
+  <%= link_to application.name, "/applications/#{application.id}" %>
+  <% end %>
+</section>
