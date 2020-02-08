@@ -14,4 +14,5 @@
 <h4>Adoption Status: <%= @pet.adoption_status %></h4>
 <h4><a href='/pets/<%= @pet.id %>/edit'>Update <%= @pet.name %>'s information!</a></h4>
 <%=link_to "Delete #{@pet.name}'s whole existence! Go ahead!", "/pets/#{@pet.id}", :method => :delete%>
+<h4><%= link_to "All Applications For This Pet", "/pets/#{@pet.id}/applications" %></h4>
 </p>
