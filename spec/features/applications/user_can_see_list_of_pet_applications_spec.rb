@@ -60,6 +60,28 @@ RSpec.describe 'apply for pet' do
       within("#pending-applications") do
          expect(page).to have_link(@pet1.name)
        end
+
+      visit "/pets/#{@pet1.id}"
+      click_button("Favorite this pet.")
+      visit "/favorites"
+      click_link("Adopt Your Favorite Pets")
+
+      find(:css, "#check-#{@pet1.id}").set(true)
+      fill_in "Name", with: "Pepe"
+      fill_in "Address", with: "4534 E. July Ct."
+      fill_in "City", with: "Memphis"
+      fill_in "State", with: "TN"
+      fill_in "Zip", with: "38113"
+      fill_in "Phone Number", with: "901-044-5564";
+      fill_in "Describe why you would make a good home:", with: "I need company."
+      click_button "Submit Your Application"
+
+      visit '/favorites'
+
+      expect(page).to have_css("#pending-applications")
+      within("#pending-applications") do
+         expect(page).to have_link(@pet1.name, count: 2)
+       end
     end
   end
 
