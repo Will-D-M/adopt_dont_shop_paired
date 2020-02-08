@@ -38,7 +38,7 @@ RSpec.describe 'apply for pet' do
     click_link("Adopt Your Favorite Pets")
 
     find(:css, "#check-#{@pet1.id}").set(true)
-    find(:css, "#check-#{@pet2.id}").set(false)
+    find(:css, "#check-#{@pet2.id}").set(true)
 
     fill_in "Name", with: "Heihachi"
     fill_in "Address", with: "1234 E. Tokyo St."
@@ -79,6 +79,25 @@ RSpec.describe 'apply for pet' do
       expect(page).to have_content(@application.zip)
       expect(page).to have_content(@application.phone_number)
       expect(page).to have_content(@application.description)
+    end
+
+    scenario "I can see the application's pet names" do
+      @application = Application.all.first
+      visit "/applications/#{@application.id}"
+
+      within("#pet#{@application.pets.first.id}") do
+        expect(page).to have_link("#{@application.pets.first.name}")
+        click_link("#{@application.pets.first.name}")
+        expect(current_path).to eq("/pets/#{@application.pets.first.id}")
+      end
+
+      visit "/applications/#{@application.id}"
+
+      within("#pet#{@application.pets[1].id}") do
+        expect(page).to have_link("#{@application.pets[1].name}")
+        click_link("#{@application.pets[1].name}")
+        expect(current_path).to eq("/pets/#{@application.pets[1].id}")
+      end
     end
   end
 
