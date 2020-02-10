@@ -64,13 +64,13 @@ RSpec.describe Shelter do
       review_1 = Review.create!(title: "Great",
                                rating: 4,
                                content: "thanks",
-                               image: "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70",
+                               picture: "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70",
                                shelter: shelter1)
 
       review_2 = Review.create!(title: "Amazing",
                                rating: 5,
                                content: "You the best",
-                               image: "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70",
+                               picture: "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70",
                                shelter: shelter1)
 
       expect(shelter1.average_rating).to eq(4.5)
