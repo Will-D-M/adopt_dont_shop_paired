@@ -6,12 +6,11 @@ class Pet < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :approximate_age
   validates_presence_of :sex
-  # validates_presence_of :description
+  validates_presence_of :description
 
 
   def default_values
     self.adoption_status = "adoptable" if self.adoption_status.nil?
-    self.description = "Looking for a home" if self.description.nil?
   end
 
   def applicant
