@@ -84,4 +84,18 @@ RSpec.describe "create shelter", type: :feature do
     expect(page).to have_content("CO")
     expect(page).to have_content("80019")
   end
+
+  it "can display message if fields are missing" do
+    visit "/shelters/new"
+
+    fill_in "shelter_name", with: "Spot"
+    fill_in "shelter_address", with: "5378 W. Curry St."
+    fill_in "shelter_city", with: "Westminster"
+    fill_in "shelter_state", with: "CO"
+
+    click_button 'Submit'
+
+    expect(page).to have_button("Submit")
+    expect(page).to have_content("Zip can't be blank")
+  end
 end
