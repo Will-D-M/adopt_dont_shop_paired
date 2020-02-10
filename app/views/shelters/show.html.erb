@@ -11,6 +11,9 @@
 
 <p><%= link_to "Pets", "/shelters/#{@shelter.id}/pets" %></p>
 
+<p>Number of pets at this shelter: <%= @shelter.pet_count %> </p>
+<p>Number of applications on file for pets at this shelter: <%= @shelter.number_of_applications %></p>
+<p>Average Rating: <%= @shelter.average_rating.round(2) %> / 5</p>
 
 <%= link_to 'Add Review', "/shelters/#{@shelter.id}/reviews/new" %>
 <% @shelter.reviews.each do |review| %>
@@ -22,4 +25,5 @@
   <p><%= link_to "Delete this review!", "/reviews/#{review.id}", method: :delete %></p>
   <%= image_tag(review.picture) %>
 </section>
+
 <% end %>
