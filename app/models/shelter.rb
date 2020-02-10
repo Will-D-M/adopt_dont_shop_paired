@@ -12,6 +12,7 @@ class Shelter < ApplicationRecord
     pets.any? do |pet|
       pet.adoption_status == "pending"
     end
+    #pets.where.adoptionstatus .empty
   end
 
   def average_rating
