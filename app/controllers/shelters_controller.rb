@@ -33,7 +33,14 @@ class SheltersController < ApplicationController
     shelter.update({name: params[:shelter_name],
       address: params[:shelter_address], city: params[:shelter_city],
       state: params[:shelter_state], zip: params[:shelter_zip]})
-    redirect_to "/shelters/#{shelter.id}"
+
+    if shelter.save
+      redirect_to "/shelters/#{shelter.id}"
+      flash[:success] = "The shelter has been updated!"
+    else
+      flash.now[:notice] = shelter.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def destroy
