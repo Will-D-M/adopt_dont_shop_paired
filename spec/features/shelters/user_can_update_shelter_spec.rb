@@ -66,4 +66,14 @@ RSpec.describe "update shelter", type: :feature do
     expect(page).to have_content("CO")
     expect(page).to have_content("80309")
   end
+
+  it "gives me a flash message telling me which field is not filled out" do
+    visit "/shelters/#{@shelter1.id}/edit"
+
+    fill_in 'shelter_name', with: ''
+    click_button 'Submit'
+
+    expect(page).to have_button("Submit")
+    expect(page).to have_content("Name can't be blank")
+  end
 end
