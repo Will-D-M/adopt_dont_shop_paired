@@ -7,6 +7,9 @@ BE Mod 2 Week 2/3 Pair Project
 
 Students will be put into pairs to complete the project.
 
+## Database Diagram
+![database diagram](app/assets/images/dbdiagram.png)
+
 ## Learning Goals
 
 ### Rails

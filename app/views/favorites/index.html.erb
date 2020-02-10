@@ -1,12 +1,12 @@
 <h4><%= link_to "Adopt Your Favorite Pets", '/applications/new' %></h4>
-<% if @fav_pets.empty? %>
+<% if @allpets.fav_pets(@favorites).empty? %>
   <h3>You have not favorited any pets.</h3>
 <% else %>
   <%= button_to 'Remove All Pets from Favorites', "/favorites", method: :delete, class: 'button' %>
 <% end %>
 
 <section id="available">
-<% @fav_pets.each do |pet| %>
+<% @allpets.fav_pets(@favorites).each do |pet| %>
   <section id="favorite<%= pet.id %>">
     <%= image_tag(pet.image, {:style => "width:200px;"}) %>
      <h4><%= link_to "Name: #{pet.name}", href="/pets/#{pet.id}" %></h4>
@@ -20,7 +20,7 @@
 <h2>Pending Applications</h2>
 
 <section id="pending-applications">
-  <% PetApplication.get_pets.each do |pet| %>
+  <% @allpets.pets_with_applications.each do |pet| %>
     <h4><%= link_to "Name: #{pet.name}", href="/pets/#{pet.id}" %></h4>
   <% end %>
 </section>
