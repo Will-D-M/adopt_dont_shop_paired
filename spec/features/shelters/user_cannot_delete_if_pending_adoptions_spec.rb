@@ -28,9 +28,11 @@ describe "As a visitor", type: :feature do
 
       visit '/applications/new'
 
+      name = "Heihachi"
+
       find(:css, "#check-#{@pet1.id}").set(true)
 
-      fill_in "Name", with: "Heihachi"
+      fill_in "Name", with: name
       fill_in "Address", with: "1234 E. Tokyo St."
       fill_in "City", with: "Los Angeles"
       fill_in "State", with: "CA"
@@ -40,9 +42,17 @@ describe "As a visitor", type: :feature do
 
       click_button "Submit Your Application"
 
+      visit "pets/#{@pet1.id}"
+
+      click_link 'All Applications For This Pet'
+
+      click_link "#{name}"
+
+      click_link "Approve #{@pet1.name}'s application"
+
       visit "/shelters/#{@shelter1.id}"
 
-      expect(page).to_not have_link('Delete Shelter')
+      expect(page).to_not have_button("Delete #{@shelter1.name}")
     end
   end
 end
