@@ -44,11 +44,13 @@ class PetsController < ApplicationController
       pet.update(adoption_status: "pending")
       pet_app = PetApplication.where(pet_id: params[:petid], application_id: params[:appid])[0]
       pet_app.update(adopted: true)
+      pet.update(approved: true)
       redirect_to "/pets/#{pet.id}"
     elsif pet.adoption_status == "pending"
       pet.update(adoption_status: "adoptable")
       pet_app = PetApplication.where(pet_id: params[:petid], application_id: params[:appid])[0]
       pet_app[:adopted] = false
+      pet.update(approved: false)
       redirect_to "/applications/#{params[:appid]}"
     end
   end
