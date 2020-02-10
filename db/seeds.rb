@@ -29,7 +29,7 @@ sex: "male",
 shelter_name: "Meg's Shelter",
 shelter_id: megs_shelter.id)
 app1 = Application.create(name: "Hello", address: "123 E. Tray", city: "Denver", state: "CO", zip: "80034", phone_number: "7204678498", description: "i like pets")
-petapp1 = PetApplication.create(application_id: app1.id, pet_id: odell.id)
-petapp2 = PetApplication.create(application_id: app1.id, pet_id: athena.id)
+# petapp1 = PetApplication.create(application_id: app1.id, pet_id: odell.id)
+# petapp2 = PetApplication.create(application_id: app1.id, pet_id: athena.id)
 
 #run this with 'rails db:seed' after pet show
