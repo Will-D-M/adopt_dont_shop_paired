@@ -82,11 +82,25 @@ RSpec.describe "deletes pet", type: :feature do
     @application = Application.all.first
     visit "/applications/#{@application.id}"
     click_link("Approve Patra's application")
-    
+
     expect(page).to have_content("You cannot delete this pet while its application is approved.")
 
     visit "/pets"
     expect(page).to have_content("You cannot delete this pet while its application is approved.")
+  end
+
+  scenario "delete a pet and it is removed from favorites" do
+    visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
+    visit "/pets/#{@pet2.id}"
+    click_button("Favorite this pet.")
+    visit "/favorites"
+    expect(page).to have_link('Patra', href:  "/pets/#{@pet1.id}")
+    visit "/pets/#{@pet1.id}"
+    click_link("Delete Patra's whole existence! Go ahead!")
+    visit "/favorites"
+
+    expect(page).not_to have_link('Patra', href:  "/pets/#{@pet1.id}")
   end
 
 end
