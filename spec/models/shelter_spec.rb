@@ -29,6 +29,27 @@ RSpec.describe Shelter do
       adoption_status: "adoptable")
 
       expect(@shelter1.pets_pending?).to eq(false)
+
+      visit "/pets/#{@pet1.id}"
+      click_button 'Favorite this pet.'
+
+      visit '/applications/new'
+
+      name = "Heihachi"
+
+      find(:css, "#check-#{@pet1.id}").set(true)
+
+      fill_in "Name", with: name
+      fill_in "Address", with: "1234 E. Tokyo St."
+      fill_in "City", with: "Los Angeles"
+      fill_in "State", with: "CA"
+      fill_in "Zip", with: "90224"
+      fill_in "Phone Number", with: "435-038-9879";
+      fill_in "Describe why you would make a good home:", with: "I love pets."
+
+      click_button "Submit Your Application"
+
+      expect(@shelter1.pets_pending?).to eq(true)
     end
   end
 end
