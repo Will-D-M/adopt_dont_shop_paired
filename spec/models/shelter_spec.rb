@@ -130,27 +130,12 @@ RSpec.describe Shelter do
       description: "cuddly",
       adoption_status: "adoptable")
 
-      pet2_path = "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70"
-
-      pet2 = Pet.create(image: pet2_path,
-      name: "Billy",
-      approximate_age: 1,
-      sex: "free",
-      shelter_id: shelter1.id,
-      shelter_name: shelter1.name,
-      description: "cuddly",
-      adoption_status: "adoptable")
-
       visit "/pets/#{pet1.id}"
-      click_button "Favorite this pet."
-
-      visit "/pets/#{pet2.id}"
       click_button "Favorite this pet."
 
       visit '/applications/new'
 
       find(:css, "#check-#{pet1.id}").set(true)
-      find(:css, "#check-#{pet2.id}").set(true)
 
       fill_in "Name", with: "Heihachi"
       fill_in "Address", with: "1234 E. Tokyo St."
@@ -162,7 +147,7 @@ RSpec.describe Shelter do
 
       click_button "Submit Your Application"
 
-      expect(shelter1.number_of_applications).to eq(2)
+      expect(shelter1.number_of_applications).to eq(1)
     end
   end
 end
