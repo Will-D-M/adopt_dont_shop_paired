@@ -3,8 +3,14 @@
   <% @shelters.each do |shelter| %>
     <h2><a href="/shelters/<%= shelter.id %>"><%= shelter.name %></a>
       <%= button_to "Edit #{shelter.name}", "/shelters/#{shelter.id}/edit", method: :get %>
-      <%= button_to "Delete #{shelter.name}", "/shelters/#{shelter.id}", :method => :delete %>
-    </h2>
 
+    <p> <% if !shelter.pets_pending? %>
+        <%= button_to "Delete #{shelter.name}", "/shelters/#{shelter.id}", method: :delete %>
+      <% end %>
+    </p>
+
+    </h2>
+    <break>
+    <break>
   <% end %>
 <a href="/shelters/new">Create New Shelter</a>

@@ -4,7 +4,11 @@
 <h3>State: <%= @shelter.state %></h3>
 <h3>Zip: <%= @shelter.zip %></h3>
 <h3><a href="/shelters/<%= @shelter.id %>/edit">Update Shelter</h3>
-<%=link_to "Delete Shelter", "/shelters/#{@shelter.id}", :method => :delete%>
+
+<% if !@shelter.pets_pending? %>
+  <%= button_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete %>
+<% end %>
+
 <p><%= link_to "Pets", "/shelters/#{@shelter.id}/pets" %></p>
 
 
