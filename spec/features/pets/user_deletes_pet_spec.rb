@@ -82,7 +82,10 @@ RSpec.describe "deletes pet", type: :feature do
     @application = Application.all.first
     visit "/applications/#{@application.id}"
     click_link("Approve Patra's application")
+    
+    expect(page).to have_content("You cannot delete this pet while its application is approved.")
 
+    visit "/pets"
     expect(page).to have_content("You cannot delete this pet while its application is approved.")
   end
 
