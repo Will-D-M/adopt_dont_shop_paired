@@ -2,7 +2,8 @@ class FavoritesController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   def index
-    @fav_pets = Pet.favpets(favorites)
+    favorites
+    @allpets = Pet.all
   end
 
   def update
