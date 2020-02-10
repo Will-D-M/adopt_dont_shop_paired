@@ -38,5 +38,8 @@ RSpec.describe "shelter id", type: :feature do
     expect(page).to have_content("City: #{@shelter1.city}")
     expect(page).to have_content("State: #{@shelter1.state}")
     expect(page).to have_content("Zip: #{@shelter1.zip}")
+    expect(page).to have_content("Number of pets at this shelter: #{@shelter1.pet_count}")
+    expect(page).to have_content("Number of applications on file for pets at this shelter: #{@shelter1.number_of_applications}")
+    expect(page).to have_content("Average Rating: #{@shelter1.average_rating}")
   end
 end
