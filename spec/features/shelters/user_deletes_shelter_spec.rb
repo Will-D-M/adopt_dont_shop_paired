@@ -44,7 +44,7 @@ RSpec.feature "delete shelter", type: :feature do
     expect(page).to have_content("CO")
     expect(page).to have_content("83504")
 
-    click_link("Delete Shelter")
+    click_button("Delete #{@shelter1.name}")
 
     expect(current_path).to eq("/shelters")
     expect(page).not_to have_link("Bloke")
