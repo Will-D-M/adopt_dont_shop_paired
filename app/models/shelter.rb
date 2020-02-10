@@ -18,4 +18,8 @@ class Shelter < ApplicationRecord
     reviews.average(:rating).to_f
   end
 
+  def pet_count
+    pets.count
+  end
+
 end
