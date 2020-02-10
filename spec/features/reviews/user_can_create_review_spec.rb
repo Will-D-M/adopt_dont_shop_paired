@@ -13,7 +13,6 @@ describe "As a visitor" do
       visit "/shelters/#{shelter_1.id}"
 
       expect(page).to_not have_content(title)
-      expect(page).to_not have_content(rating)
       expect(page).to_not have_content(content)
       expect(page).to_not have_content(picture)
 
