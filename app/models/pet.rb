@@ -3,6 +3,11 @@ class Pet < ApplicationRecord
   has_many :pet_applications, dependent: :destroy
   has_many :applications, through: :pet_applications
   before_save :default_values
+  validates_presence_of :name
+  validates_presence_of :approximate_age
+  validates_presence_of :sex
+  # validates_presence_of :description
+
 
   def default_values
     self.adoption_status = "adoptable" if self.adoption_status.nil?
