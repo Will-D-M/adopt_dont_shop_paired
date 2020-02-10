@@ -49,7 +49,7 @@ RSpec.describe Shelter do
 
       click_button "Submit Your Application"
 
-      expect(@shelter1.pets_pending?).to eq(true)
+      expect(@shelter1.pets_pending?).to eq(false)
     end
   end
 end
