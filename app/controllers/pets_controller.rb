@@ -12,12 +12,18 @@ class PetsController < ApplicationController
   end
 
   def create
-    pet = Pet.create(name: params[:pet_name],
+    pet = Pet.new(name: params[:pet_name],
       description: params[:pet_description],
       approximate_age: params[:pet_approximate_age],
       sex: params[:pet_sex], adoption_status: "adoptable",
       shelter_id: params[:id], shelter_name: Shelter.find(params[:id]).name)
-    redirect_to "/shelters/#{params[:id].to_i}/pets"
+      if pet.save
+        flash[:success] = "The pet has been created."
+        redirect_to "/shelters/#{params[:id].to_i}/pets"
+      else
+        flash[:notice] = pet.errors.full_messages.to_sentence
+        redirect_to "/shelters/#{params[:id].to_i}/pets/new"
+      end
   end
 
   def edit
@@ -30,7 +36,13 @@ class PetsController < ApplicationController
       description: params[:pet_description],
       approximate_age: params[:pet_approximate_age],
       sex: params[:pet_sex])
-    redirect_to "/pets/#{params[:id]}"
+      if pet.save
+        flash[:success] = "The pet has been updated."
+        redirect_to "/pets/#{params[:id]}"
+      else
+        flash[:error] = pet.errors.full_messages.to_sentence
+        redirect_to "/pets/#{pet.id}/edit"
+      end
   end
 
   def destroy
