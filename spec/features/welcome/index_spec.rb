@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "As a visitor on the welcome index page", type: :feature do
+describe "As a visitor on the welcome index page" do
   describe "there is a link to the pet index" do
     it "that takes me to the pet index" do
       visit "/"
