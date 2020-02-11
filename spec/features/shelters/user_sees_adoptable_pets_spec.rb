@@ -52,6 +52,7 @@ RSpec.describe "pets index", type: :feature do
     visit "/shelters/#{@shelter1.id}/pets"
 
     expect(page).to have_content('All Pets for Bloke')
+    expect(page).to have_link(@shelter1.name)
     expect(page).to have_css("img[src*='#{@pet1.image}']")
     expect(page).to have_content("Patra")
     expect(page).to have_content(2)
