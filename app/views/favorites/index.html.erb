@@ -6,6 +6,7 @@
 <% end %>
 
 <section id="available">
+  <h2>Available Pets</h2>
 <% @allpets.fav_pets(@favorites).each do |pet| %>
   <section id="favorite<%= pet.id %>">
     <%= image_tag(pet.image, {:style => "width:200px;"}) %>
@@ -15,12 +16,20 @@
 <% end %>
 </section>
 
-
-
-<h2>Pending Applications</h2>
-
 <section id="pending-applications">
+<h2>Pending Applications</h2>
   <% @allpets.pets_with_applications.each do |pet| %>
+    <% if pet.approved == false %>
     <h4><%= link_to "Name: #{pet.name}", href="/pets/#{pet.id}" %></h4>
+    <% end %>
+  <% end %>
+</section>
+
+<section id="approved-applications">
+<h2>Approved Applications</h2>
+  <% @allpets.pets_with_applications.each do |pet| %>
+    <% if pet.approved == true %>
+    <h4><%= link_to "Name: #{pet.name}", href="/pets/#{pet.id}" %></h4>
+    <% end %>
   <% end %>
 </section>
