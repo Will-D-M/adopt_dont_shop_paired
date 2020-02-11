@@ -69,4 +69,32 @@ RSpec.describe 'update pet info', type: :feature do
     expect(page).to have_content('all day all day')
   end
 
+  scenario "fill out/submit form incompletely, get redirected to pet edit page with error message" do
+    visit "/pets/#{@pet2.id}/edit"
+
+    fill_in 'pet_image', with: nil
+    fill_in 'pet_name', with: ''
+    fill_in 'pet_description', with: ''
+    fill_in 'pet_approximate_age', with: 6
+    fill_in 'pet_sex', with: 'all day all day'
+    click_button 'Update'
+
+    expect(current_path).to eq("/pets/#{@pet2.id}/edit")
+    expect(page).to have_content("Name can't be blank and Description can't be blank")
+  end
+
+  scenario "fill out/submit form completely, get redirected to pet show page with success message" do
+    visit "/pets/#{@pet2.id}/edit"
+
+    fill_in 'pet_image', with: nil
+    fill_in 'pet_name', with: 'Bowser'
+    fill_in 'pet_description', with: 'no longer grumpy, now frumpy'
+    fill_in 'pet_approximate_age', with: 6
+    fill_in 'pet_sex', with: 'all day all day'
+    click_button 'Update'
+
+    expect(current_path).to eq("/pets/#{@pet2.id}")
+    expect(page).to have_content("The pet has been updated.")
+  end
+
 end

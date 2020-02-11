@@ -7,6 +7,13 @@ RSpec.describe Pet do
     it {should have_many(:applications).through(:pet_applications)}
   end
 
+  describe "validations" do
+    it { should validate_presence_of :name
+      should validate_presence_of :approximate_age
+      should validate_presence_of :description
+      should validate_presence_of :sex}
+  end
+
   before(:each) do
     @mikes_shelter = Shelter.create(name: "Mike's Shelter",
       address: "1331 17th Street", city: "Denver", state: "CO", zip: "80202")

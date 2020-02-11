@@ -59,4 +59,48 @@ RSpec.describe "deletes pet", type: :feature do
     expect(current_path).to eq("/pets")
     expect(page).not_to have_link('Patra', href:  "/pets/#{@pet1.id}")
   end
+
+  scenario "pet with approved application cannot be deleted" do
+    visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
+    visit "/pets/#{@pet2.id}"
+    click_button("Favorite this pet.")
+
+    visit "/favorites"
+    click_link("Adopt Your Favorite Pets")
+
+    find(:css, "#check-#{@pet1.id}").set(true)
+
+    fill_in "Name", with: "Heihachi"
+    fill_in "Address", with: "1234 E. Tokyo St."
+    fill_in "City", with: "Los Angeles"
+    fill_in "State", with: "CA"
+    fill_in "Zip", with: "90224"
+    fill_in "Phone Number", with: "435-038-9879";
+    fill_in "Describe why you would make a good home:", with: "I love pets."
+    click_button "Submit Your Application"
+    @application = Application.all.first
+    visit "/applications/#{@application.id}"
+    click_link("Approve Patra's application")
+
+    expect(page).to have_content("You cannot delete this pet while its application is approved.")
+
+    visit "/pets"
+    expect(page).to have_content("You cannot delete this pet while its application is approved.")
+  end
+
+  scenario "delete a pet and it is removed from favorites" do
+    visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
+    visit "/pets/#{@pet2.id}"
+    click_button("Favorite this pet.")
+    visit "/favorites"
+    expect(page).to have_link('Patra', href:  "/pets/#{@pet1.id}")
+    visit "/pets/#{@pet1.id}"
+    click_link("Delete Patra's whole existence! Go ahead!")
+    visit "/favorites"
+
+    expect(page).not_to have_link('Patra', href:  "/pets/#{@pet1.id}")
+  end
+
 end

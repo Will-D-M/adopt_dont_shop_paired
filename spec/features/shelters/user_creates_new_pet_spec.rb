@@ -66,4 +66,17 @@ RSpec.describe "create pet", type: :feature do
     expect(page).to have_content('flowersandrainbows')
   end
 
+  scenario "fill out form incorrectly, submit, and redirect to pets create form" do
+    visit "/shelters/#{@shelter2.id}/pets/new"
+
+    fill_in "pet_name", with: "Medgar"
+    fill_in "pet_description", with: ""
+    fill_in "pet_approximate_age", with: 1
+    fill_in "pet_sex", with: ""
+    click_button 'Add a Pet'
+
+    expect(current_path).to eq("/shelters/#{@shelter2.id}/pets/new")
+    expect(page).to have_content("Sex can't be blank and Description can't be blank")
+  end
+
 end
