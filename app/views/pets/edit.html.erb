@@ -1,4 +1,4 @@
-<h2>Fill out this form to update <%= @pet.name %>'s information</h2>
+<h2>Fill out this form to update <%= link_to @pet.name, "/pets/#{@pet.id}" %>'s information</h2>
 <%= form_tag "/pets/#{@pet.id}", method: 'PATCH' do %>
   <h4>Image: <%= text_field_tag 'pet_image' %></h4>
   <h4>Name: <%= text_field_tag 'pet_name' %></h4>
