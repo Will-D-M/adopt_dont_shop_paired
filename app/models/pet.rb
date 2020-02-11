@@ -18,7 +18,7 @@ class Pet < ApplicationRecord
   end
 
   def self.pets_with_applications
-    select(:name, :id).joins(:pet_applications)
+    select(:name, :id, :approved).joins(:pet_applications)
   end
 
   def self.fav_pets(favorites)
