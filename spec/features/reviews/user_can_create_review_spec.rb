@@ -20,12 +20,19 @@ describe "As a visitor" do
 
       expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
 
+      click_button 'Submit'
+
+      expect(page).to have_content("Please fill out all required fields.")
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
+
       fill_in 'Title', with: title
       fill_in 'Rating', with: rating
       fill_in 'Content', with: content
       fill_in 'Picture', with: picture
 
       click_button 'Submit'
+
       expect(current_path).to eq("/shelters/#{shelter_1.id}")
       expect(page).to have_content(title)
       expect(page).to have_content(rating)
