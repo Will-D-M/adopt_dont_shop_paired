@@ -60,6 +60,7 @@ describe 'As a visitor on the pet show page' do
     visit "/pets/#{@pet1.id}"
 
     expect(page).to have_content("Adoption Status: pending")
+    expect(page).to have_content('This pet is on hold for Heihachi.')
     expect(page).to have_content("You cannot delete this pet while its application is approved.")
     expect(page).to_not have_link("Delete #{@pet1.name}'s whole existence! Go ahead!")
   end
