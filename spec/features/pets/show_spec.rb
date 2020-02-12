@@ -33,6 +33,35 @@ describe 'As a visitor on the pet show page' do
     expect(page).to have_link("Delete #{@pet1.name}'s whole existence! Go ahead!")
     expect(page).to have_link("All Applications For This Pet")
     expect(page).to have_content("This pet has no holds.")
+
+    visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
+
+    visit "/favorites"
+    click_link("Adopt Your Favorite Pets")
+
+    name = "Heihachi"
+
+    find(:css, "#check-#{@pet1.id}").set(true)
+    fill_in "Name", with: name
+    fill_in "Address", with: "1234 E. Tokyo St."
+    fill_in "City", with: "Los Angeles"
+    fill_in "State", with: "CA"
+    fill_in "Zip", with: "90224"
+    fill_in "Phone Number", with: "435-038-9879";
+    fill_in "Describe why you would make a good home:", with: "I love pets."
+
+    click_button "Submit Your Application"
+
+    visit "/pets/#{@pet1.id}/applications"
+    click_link(name)
+    click_link("Approve #{@pet1.name}'s application")
+
+    visit "/pets/#{@pet1.id}"
+
+    expect(page).to have_content("Adoption Status: pending")
+    expect(page).to have_content("You cannot delete this pet while its application is approved.")
+    expect(page).to_not have_link("Delete #{@pet1.name}'s whole existence! Go ahead!")
   end
 
   describe 'when I click the favorites button' do
@@ -43,6 +72,7 @@ describe 'As a visitor on the pet show page' do
         expect(page).to have_button("Remove this pet from favorites.")
         expect(page).to_not have_button("Favorite this pet.")
         expect(page).to have_content("The pet has been added to your favorites list.")
+        expect(page).to have_link("Favorites: 1 pet")
 
         visit "/favorites"
 
@@ -52,6 +82,7 @@ describe 'As a visitor on the pet show page' do
 
         click_button("Remove this pet from favorites.")
         expect(page).to have_content("The pet has been removed from your Favorite Pets.")
+        expect(page).to have_link("Favorites: 0 pets")
 
         visit "/favorites"
 
@@ -84,4 +115,10 @@ describe 'As a visitor on the pet show page' do
     end
   end
 
+  it "I can see the header and footer" do
+    page.should have_link('All Pets')
+    page.should have_link('All Shelters')
+    page.should have_link('Favorites: 0 pets')
+    expect(page).to have_content("Thank you for visiting our site! Do not hesitate to contact us at 1-800-NOPE!")
+  end
 end
