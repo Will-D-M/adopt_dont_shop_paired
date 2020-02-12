@@ -23,6 +23,12 @@ describe 'As a visitor on the shelter show page' do
                         shelter_id: @shelter1.id,
                         shelter_name: @shelter1.name )
 
+    @review1 = Review.create( title: "Good",
+                              rating: 5,
+                              content: "I found my new best friend",
+                              picture: "https://images-ra.adoptapet.com/images/Homepage-DogV2.png",
+                              shelter_id: "#{@shelter1.id}" )
+
     visit "/shelters/#{@shelter1.id}"
   end
 
@@ -102,19 +108,24 @@ describe 'As a visitor on the shelter show page' do
   end
 
   it "I can see all reviews" do
-    visit "/shelters/#{@shelter1.id}/reviews/new"
-
-    fill_in 'Title', with: "Good"
-    fill_in 'Rating', with: 5
-    fill_in 'Content', with: "I found my new best friend"
-    fill_in 'Picture', with: "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
-    click_button 'Submit'
-
     expect(current_path).to eq("/shelters/#{@shelter1.id}")
     expect(page).to have_content("Good")
     expect(page).to have_content(5)
     expect(page).to have_content("I found my new best friend")
     expect(page).to have_css("img[src*='#{"https://images-ra.adoptapet.com/images/Homepage-DogV2.png"}']")
+  end
+
+  it "I can edit reviews" do
+    click_link("Edit this review!")
+    expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
+  end
+
+  it "I can delete reviews" do
+    click_link("Delete this review!")
+    expect(current_path).to eq("/shelters/#{@shelter1.id}")
+    expect(page).to_not have_content("Good")
+    expect(page).to_not have_content("I found my new best friend")
+    expect(page).to_not have_css("img[src*='#{"https://images-ra.adoptapet.com/images/Homepage-DogV2.png"}']")
   end
 
   it "I can see the header and footer" do
