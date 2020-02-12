@@ -1,9 +1,3 @@
 <h2>Fill out this form for a new shelter!</h2>
-<%= form_tag "/shelters", method: 'post' do %>
-  <h4>Name: <%= text_field_tag 'shelter_name' %></h4>
-  <h4>Address: <%= text_field_tag 'shelter_address' %></h4>
-  <h4>City: <%= text_field_tag 'shelter_city' %></h4>
-  <h4>State: <%= text_field_tag 'shelter_state' %></h4>
-  <h4>Zip: <%= text_field_tag 'shelter_zip' %></h4>
-  <%= submit_tag 'Submit' %>
-<% end %>
+
+<%= render partial: 'form', locals: {path: "/shelters", method: :post, button_text: 'Submit'} %>
