@@ -33,6 +33,8 @@ describe "As a visitor on the pets new page" do
 
       expect(current_path).to eq("/shelters/#{@shelter1.id}/pets")
 
+      expect(page).to have_content("The pet has been created.")
+
       within("#pet#{@pet1.id}") do
         expect(page).to have_link("Name: #{@pet1.name}")
         expect(page).to have_content("Approximate Age: #{@pet1.approximate_age}")
