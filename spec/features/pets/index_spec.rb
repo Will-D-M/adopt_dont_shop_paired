@@ -19,6 +19,15 @@ describe 'As a visitor on the pets index page' do
                         description: "cuddly",
                         adoption_status: "adoptable" )
 
+    @pet2 = Pet.create( image: pet1_path,
+                        name: "Shibby",
+                        approximate_age: 1,
+                        sex: "yes",
+                        shelter_id: @shelter1.id,
+                        shelter_name: @shelter1.name,
+                        description: "okay",
+                        adoption_status: "adoptable" )
+
     visit "/pets"
   end
 
