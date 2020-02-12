@@ -100,6 +100,33 @@ describe "As a visitor on the favorites page" do
     end
   end
 
+  it "I see a list of all pets with approved applications" do
+    visit "/pets/#{@pet1.id}"
+    click_button("Favorite this pet.")
+    visit "/favorites"
+    click_link("Adopt Your Favorite Pets")
+
+    find(:css, "#check-#{@pet1.id}").set(true)
+    fill_in "Name", with: "Heihachi"
+    fill_in "Address", with: "1234 E. Tokyo St."
+    fill_in "City", with: "Los Angeles"
+    fill_in "State", with: "CA"
+    fill_in "Zip", with: "90224"
+    fill_in "Phone Number", with: "435-038-9879";
+    fill_in "Describe why you would make a good home:", with: "I love pets."
+    click_button "Submit Your Application"
+
+    click_link("Name: #{@pet1.name}")
+    click_link("All Applications For This Pet")
+    click_link("Heihachi")
+    click_link("Approve #{@pet1.name}'s application")
+    visit '/favorites'
+
+    within("#approved-applications") do
+      expect(page).to have_link(@pet1.name)
+    end
+  end
+
   it "I can remove all favorited pets at once" do
     visit "/pets/#{@pet1.id}"
     click_button 'Favorite this pet.'
@@ -119,7 +146,7 @@ describe "As a visitor on the favorites page" do
 
   it "I can see the header and footer" do
     visit '/favorites'
-    
+
     page.should have_link('All Pets')
     page.should have_link('All Shelters')
     page.should have_link('Favorites: 0 pets')
