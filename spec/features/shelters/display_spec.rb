@@ -76,4 +76,11 @@ describe "As a visitor on the shelter's pets page" do
     expect(page).to_not have_button("Edit #{@pet3.name}'s info!")
     expect(page).to_not have_button("Delete #{@pet3.name}")
   end
+
+  it "I can see the header and footer" do
+    page.should have_link('All Pets')
+    page.should have_link('All Shelters')
+    page.should have_link('Favorites: 0 pets')
+    expect(page).to have_content("Thank you for visiting our site! Do not hesitate to contact us at 1-800-NOPE!")
+  end
 end
