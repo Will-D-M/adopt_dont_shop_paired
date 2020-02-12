@@ -1,6 +1,5 @@
 <h2>All Pets</h2>
   <%@pets.each do |pet|%>
-  <section id="pet<%= pet.id %>"
   <img src="<%=  pet.image %>" alt="<%= pet.image %>" style="width:200px">
   <h4><a href="/pets/<%= pet.id %>">Name: <%= pet.name %></a></h4>
   <h4>Approximate Age: <%= pet.approximate_age %></h4>
@@ -12,6 +11,5 @@
   <% elsif pet.approved == true %>
     <h4>You cannot delete this pet while its application is approved.</h4>
   <% end %>
-</section>
-<break><break><break>
-    <% end %>
+  </p>
+  <% end %>
