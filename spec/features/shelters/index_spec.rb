@@ -22,6 +22,13 @@ describe 'As a visitor on the shelters index page'  do
                         shelter_id: @shelter1.id,
                         shelter_name: @shelter1.name )
 
+    @pet2 = Pet.create( image: pet1_path,
+                        name: "Patra",
+                        approximate_age: 2,
+                        sex: "free",
+                        shelter_id: @shelter2.id,
+                        shelter_name: @shelter2.name )
+
     visit "/shelters"
   end
 

@@ -9,10 +9,7 @@ class Shelter < ApplicationRecord
   validates_presence_of :zip
 
   def pets_pending?
-    pets.any? do |pet|
-      pet.adoption_status == "pending"
-    end
-    #pets.where.adoptionstatus .empty
+    pets.where(adoption_status: 'adoptable').empty?
   end
 
   def average_rating
