@@ -2,16 +2,16 @@ require 'rails_helper'
 
 describe 'As a visitor on the shelters index page'  do
   before :each do
-    @shelter1 = Shelter.create(name: "Bloke",
-    address: "123456 E. Koko St.",
-    city: "Aville",
-    state: "CO",
-    zip: "83504")
-    @shelter2 = Shelter.create(name: "Stevie",
-    address: "12765 E. Seesay St.",
-    city: "Aville",
-    state: "CO",
-    zip: "83571")
+    @shelter1 = Shelter.create( name: "Bloke",
+                                address: "123456 E. Koko St.",
+                                city: "Aville",
+                                state: "CO",
+                                zip: "83504" )
+    @shelter2 = Shelter.create( name: "Stevie",
+                                address: "12765 E. Seesay St.",
+                                city: "Aville",
+                                state: "CO",
+                                zip: "83571" )
 
     pet1_path = "https://imgix.bustle.com/uploads/getty/2019/11/18/6296727a-d38c-40b4-8ffe-dbec5cd1b289-getty-954967324.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70"
 
