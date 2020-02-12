@@ -2,6 +2,8 @@ Welcome to Adopt Don't Shop!
 
 By Will Meighan (github.com/Will-Meighan) and Elom A (github.com/eamouzou)
 
+Link to our heroku app: https://glacial-journey-11999.herokuapp.com/
+
 This is a fictional adoption shelter manager that allows the user to add/edit/delete shelters, add/edit/delete pets, assign pets to each shelter, and put in applications to adopt those pets. It allows for easy navigation from all web pages of the app.
 
 To begin, please follow these steps;
