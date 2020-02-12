@@ -35,13 +35,11 @@ describe "As a visitor on the pets new page" do
 
       expect(page).to have_content("The pet has been created.")
 
-      within("#pet#{@pet1.id}") do
-        expect(page).to have_link("Name: #{@pet1.name}")
-        expect(page).to have_content("Approximate Age: #{@pet1.approximate_age}")
-        expect(page).to have_content("Sex: #{@pet1.sex}")
-        expect(page).to have_button("Edit #{@pet1.name}'s info!")
-        expect(page).to have_button("Delete #{@pet1.name}")
-      end
+      expect(page).to have_link("Name: #{@pet1.name}")
+      expect(page).to have_content("Approximate Age: #{@pet1.approximate_age}")
+      expect(page).to have_content("Sex: #{@pet1.sex}")
+      expect(page).to have_button("Edit #{@pet1.name}'s info!")
+      expect(page).to have_button("Delete #{@pet1.name}")
     end
 
     it 'gives me an error message if I am missing any fields' do

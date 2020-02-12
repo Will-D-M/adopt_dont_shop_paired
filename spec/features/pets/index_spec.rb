@@ -34,21 +34,17 @@ describe 'As a visitor on the pets index page' do
   it 'I can see all pets and their info' do
     expect(page).to have_content("All Pets")
 
-    within("#pet#{@pet1.id}") do
-      expect(page).to have_link("Name: #{@pet1.name}")
-      expect(page).to have_content("Approximate Age: #{@pet1.approximate_age}")
-      expect(page).to have_content("Sex: #{@pet1.sex}")
-      expect(page).to have_button("Edit #{@pet1.name}'s info!")
-      expect(page).to have_button("Delete #{@pet1.name}")
-    end
+    expect(page).to have_link("Name: #{@pet1.name}")
+    expect(page).to have_content("Approximate Age: #{@pet1.approximate_age}")
+    expect(page).to have_content("Sex: #{@pet1.sex}")
+    expect(page).to have_button("Edit #{@pet1.name}'s info!")
+    expect(page).to have_button("Delete #{@pet1.name}")
 
-    within("#pet#{@pet2.id}") do
-      expect(page).to have_link("Name: #{@pet2.name}")
-      expect(page).to have_content("Approximate Age: #{@pet2.approximate_age}")
-      expect(page).to have_content("Sex: #{@pet2.sex}")
-      expect(page).to have_button("Edit #{@pet2.name}'s info!")
-      expect(page).to have_button("Delete #{@pet2.name}")
-    end
+    expect(page).to have_link("Name: #{@pet2.name}")
+    expect(page).to have_content("Approximate Age: #{@pet2.approximate_age}")
+    expect(page).to have_content("Sex: #{@pet2.sex}")
+    expect(page).to have_button("Edit #{@pet2.name}'s info!")
+    expect(page).to have_button("Delete #{@pet2.name}")
   end
 
   describe 'when I click their name' do
