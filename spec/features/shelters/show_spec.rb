@@ -128,6 +128,19 @@ describe 'As a visitor on the shelter show page' do
     expect(page).to_not have_css("img[src*='#{"https://images-ra.adoptapet.com/images/Homepage-DogV2.png"}']")
   end
 
+  it "display a default image for reviews without pitcure included" do
+    Review.create(title: "Good",
+                  rating: 4,
+                  content: "Love dog",
+                  picture: "",
+                  shelter_id: "#{@shelter1.id}")
+
+    visit "/shelters/#{@shelter1.id}"
+    picture = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
+
+    expect(page).to have_css("img[src*='#{picture}']")
+  end
+
   it "I can see the header and footer" do
     page.should have_link('All Pets')
     page.should have_link('All Shelters')
