@@ -61,7 +61,7 @@ describe 'As a visitor on the shelters index page'  do
   end
 
   describe "if a shelter has pets that are pending adoption" do
-    it "I cannot see a button to delete that shelter on its show page" do
+    it "I cannot see a button to delete that shelter" do
       visit "/pets/#{@pet1.id}"
       click_button 'Favorite this pet.'
 
