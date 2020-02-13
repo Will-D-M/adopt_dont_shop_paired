@@ -1,4 +1,4 @@
-Welcome to Adopt Don't Shop!
+## Welcome to Adopt Don't Shop!
 
 By Will Meighan (github.com/Will-Meighan) and Elom A (github.com/eamouzou)
 
@@ -18,3 +18,8 @@ Now you have our code cloned onto your device! To start interacting with the app
 4. Enter 'rails s'
 
 From here, navigate to your web browser and enter the address http://localhost:3000/ and begin having fun! We hope you enjoy!
+
+## Database Diagram
+![database diagram](app/assets/images/dbdiagram.png)
+
+Please find our database diagram above. It illustrates the relationships between our models and the data they interact with.
