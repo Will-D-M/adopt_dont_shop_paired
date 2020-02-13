@@ -19,7 +19,7 @@ describe "As a visitor on the review new page" do
 
     it "and I can fill out that form" do
       fill_in 'Title', with: @title
-      fill_in 'Rating', with: @rating
+      select @rating, from: 'Rating'
       fill_in 'Content', with: @content
       fill_in 'Picture', with: @picture
 
@@ -29,7 +29,7 @@ describe "As a visitor on the review new page" do
     end
 
     it 'I see an error message if I submit without required fields' do
-      fill_in 'Rating', with: @rating
+      select @rating, from: 'Rating'
       fill_in 'Content', with: @content
       fill_in 'Picture', with: @picture
 
@@ -39,7 +39,7 @@ describe "As a visitor on the review new page" do
       expect(page).to have_content("Please fill out all required fields.")
 
       fill_in 'Title', with: @title
-      fill_in 'Content', with: @content
+      select @rating, from: 'Rating'
       fill_in 'Picture', with: @picture
 
       click_button 'Submit'
@@ -48,16 +48,6 @@ describe "As a visitor on the review new page" do
       expect(page).to have_content("Please fill out all required fields.")
 
       fill_in 'Title', with: @title
-      fill_in 'Rating', with: @rating
-      fill_in 'Picture', with: @picture
-
-      click_button 'Submit'
-
-      expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/new")
-      expect(page).to have_content("Please fill out all required fields.")
-
-      fill_in 'Title', with: @title
-      fill_in 'Rating', with: @rating
       fill_in 'Content', with: @content
 
       click_button 'Submit'

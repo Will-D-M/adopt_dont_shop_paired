@@ -3,7 +3,7 @@
     <%= label_tag :title %>
     <%= text_field_tag :title, @review.title%><br>
     <%= label_tag :rating %>
-    <%= text_field_tag :rating, @review.rating %><br>
+    <%= select_tag :rating, options_for_select([1, 2, 3, 4, 5], @review.rating) %><br>
     <%= label_tag :content %>
     <%= text_field_tag :content, @review.content %><br>
     <%= label_tag :picture %>
