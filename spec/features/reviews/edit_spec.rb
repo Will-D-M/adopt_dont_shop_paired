@@ -16,17 +16,17 @@ describe "As a visitor on the review edit page" do
   describe "I see an edit shelter review form with pre-populated data" do
     it "and can fill in prepopulated data with edits" do
       expect(page).to have_selector("input[value=#{@review1.title}]")
-      expect(page).to have_selector("input[value=#{@review1.rating}]")
+      expect(page).to have_content(@review1.rating)
       expect(page).to have_xpath("//input[@value='#{@review1.content}']")
       expect(find_field('Picture').value).to eq(@review1.picture)
 
       title = "Horrible"
-      rating = 1
+      edited_rating = 1
       content = "I kicked that dog out."
       picture = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
 
       fill_in 'Title', with: title
-      fill_in 'Rating', with: rating
+      select edited_rating, from: 'Rating'
       fill_in 'Content', with: content
       fill_in 'Picture', with: picture
 
@@ -34,7 +34,7 @@ describe "As a visitor on the review edit page" do
 
       expect(current_path).to eq("/shelters/#{@shelter1.id}")
       expect(page).to have_content(title)
-      expect(page).to have_content(rating)
+      expect(page).to have_content(edited_rating)
       expect(page).to have_content(content)
       expect(page).to have_css("img[src*='#{picture}']")
       expect(page).to_not have_content("Good")
@@ -43,12 +43,12 @@ describe "As a visitor on the review edit page" do
   end
 
   it 'I see an error message if I submit without required fields' do
-    rating = 1
+    edited_rating = 1
     content = "I kicked that dog out."
     picture = "https://images-ra.adoptapet.com/images/Homepage-DogV2.png"
 
     fill_in 'Title', with: ""
-    fill_in 'Rating', with: rating
+    select edited_rating, from: 'Rating'
     fill_in 'Content', with: content
     fill_in 'Picture', with: picture
 
@@ -58,17 +58,7 @@ describe "As a visitor on the review edit page" do
     expect(page).to have_content("Please fill out all required fields.")
 
     fill_in 'Title', with: title
-    fill_in 'Rating', with: ""
-    fill_in 'Content', with: content
-    fill_in 'Picture', with: picture
-
-    click_button 'Submit'
-
-    expect(current_path).to eq("/shelters/#{@review1.id}/reviews/edit")
-    expect(page).to have_content("Please fill out all required fields.")
-
-    fill_in 'Title', with: title
-    fill_in 'Rating', with: rating
+    select edited_rating, from: 'Rating'
     fill_in 'Content', with: ""
     fill_in 'Picture', with: picture
 
@@ -78,7 +68,6 @@ describe "As a visitor on the review edit page" do
     expect(page).to have_content("Please fill out all required fields.")
 
     fill_in 'Title', with: title
-    fill_in 'Rating', with: rating
     fill_in 'Content', with: content
 
     click_button 'Submit'
